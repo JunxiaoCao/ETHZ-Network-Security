@@ -1,0 +1,32 @@
+BGP Hijacks
+IP prefix hijack: malicious AS announces prefix it does not own.
+Problem 1: BGP does not validate the origin of advertisement
+-annouce same prefix
+-annouce more specific prefix(stronger variation)
+Q: Why cannot AS annouce more specific prefix to avoid this problem?
+A: Because it will cause a larger routing table and more expensive to update.
+-harder to be find: selective announcement
+-BGP poisoning
+
+How to perform BGP interception?
+step1: set up an AS and border router or compromise someone else's border router
+step2: configure router to originate taget (sub)prefix
+step3: get other ASes to accept the wrong route
+
+Problem 2: BGP does not validate the content of advertisement
+AS can modify the BGP path: 
+-remove ASes from the AS path->make the path shorter to attract traffic and attract sources that try to avoid removed AS
+-add ASes to AS path->trigger loop detection: DOS and bgp poisoning
+
+Solution1: Resource Public Key Infrastructure(RPKI) and Origin Anthentication <=> Route Origin Verification -> solve problem 1
+-RPKI enables ROA
+-ROA states which AS is authorized to announce certain IP prefix: specify the maximum length of the prefix->prevent sub-prefix hijacking
+-out-of-band checking -> no need to modify BGP
+
+Solution2: BGPsec -> solve problem2
+-secure AS-PATH attribute in BGP announcement
+-each AS sign BGP announcement as they forward it
+-verify path signature, add own entry, indicate next AS, sign the message
+
+SCION: specify the path
+
