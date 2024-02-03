@@ -1,0 +1,42 @@
+TLS
+-secure channel between two peers
+-maximize symmetric key techniques, minimize public key techniques
+-in-band choice of version and cipher suite
+-prevent MITM attack from version and cipher suite downgrade attack
+
+Handshake protocol
+negotiate cipher suite, authenticate, establish keys used in record protocol
+TLS 1.2: handshake 2 RTT
+TCP+TLS1.2 3RTT
+TLS1.2 reactive
+
+TLS1.3 proactive
+TLS1.3 record protocol
+-stream-oriented API: fragment into small units or coalesce into larger unit
+-data origin authentication and integrity for records using MAC
+-confidentialiy using symmetric encrytion algorithm
+-prevention of replay, reorder, deletion using MAC of record number
+-AEAD = encrytion+MAC  only one garbage collection Encrypt-then-MAC
+_______________________
+|payload|ctype|padding|
+-----------------------
+paddding is discarded after integrity check, so no padding oracle
+-AEAD decryption failure is fata: connection torn down, key thrown away and TLS handshake again ->prevent padding oracle attack
+
+TLS1.3 record protocol NOT prevent attacks
+-truncation attacks on streams of records
+-Application-layer confusion -> TLS do not protect TCP header
+-timing attack
+
+TLS1.3 handshake 1 rtt revocation 0 rtt
+-forward secure: because of EDHE ->if compromised earlier session is safe
+-passive future secure
+-not static DH key exchange and no reuse of ephemeral
+
+-Server sends NewSessionTicket to client, which does not include Pre-shared key(PSK), but has PSK identity, lifetime and nonce
+-if DH value is sent, forward secure
+0-rtt revoke do not forward secure
+
+
+
+
