@@ -1,0 +1,21 @@
+VPN
+create a secure channel between two networks over an untrusted network
+-authentication of the source->handshake
+-data integrity->MAC
+-replay suppression->sequence number
+
+Why do we need TLS when we have VPN?
+-data only secure in the tunnel
+-unencrypted data is visible to VPN server
+-VPN is not possible to authenticate the webserver only the tunnel endpoint
+
+Why do we need VPN when we have TLS?
+-VPN protect all traffic, including DNS requests and service that does not support TLS
+-VPN give access to services in private network or behind firewalls
+
+TLS: transport layer, end-to-end, not authenticate client, few standards
+VPN: link/network layer, tunnel, authenticate client, many standards
+
+IPsec
+Step1: set up a security association(SA) via Internel Key Exchange(IKE)
+Step2: enccapsulate packet and tunnel them between SA endpoints
