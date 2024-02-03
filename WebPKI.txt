@@ -1,0 +1,41 @@
+WebPKI
+Certificate: certify bindings from cryptographic keys to identities
+PKI is an ecosystem to manage and distribute certificates
+Why use intermediate certificate?
+private root is stored offline and easier to revoke and replace certificate
+DNSSec, BGPSec, RPKI: Monopoly structure, only one trust node
+WebPKI: Oligarchy
+
+How to revoke a certificate?
+Option0: just wait -> adversary may change victim's time
+Option1: Certificate Revocation List(CRl) -> can be large
+Option2: Online Certificate Status Protocol(OCSP) -> additional latency, soft fail when OCSP response times out, privacy issues, OCSP server can see which domain is visited    Alice--->OCSP server
+Option3: OCSP stapling 
+Alice--->web server--->OCSP server 
+web server: obtain OCSP responce in advance and serves OCSP response and certificate together to client -> fix latency and privacy issues
+if not stapled, browser should perform OCSP lookup -> adversary can still suppress OCSP responce
+
+Option4: patch the browser: browser specific mechanisms
+
+DNS-based Authentication of named entities(DANE) -> DNSSec not employed + same problem as OCSP
+-add signed records to DNS: which CA certificate should be use, which end-entity certificate should be use...
+
+HTTP Strict-Transport-Security (HSTS)
+-downgrade attacks prevented
+-always load domain over HTTPS
+
+Http Public Key pinning(HPKP)
+-specifying certificate public key whitelist for domain
+-Trust on first use(TOFU)
+
+DNS Certification Authority Authorization (CAA) check CA
+-check by CAs not browsers
+-allow domain owner to specify which CAs can issue certificates
+
+Certificate Transparency(CT): require all certificates listed in a public log
+-make CA accountable
+-log is merkle tree: only need leaf value to do inclusion proof, prrod rely on collision free and one-way
+
+CRLite: send list of revoked certificate to browser ahead of time -> list is too big
+-Bloom Filters: check collision of hash values -> false positve
+-use Bloom filter to check if elements in CRLs and CTs is exist
