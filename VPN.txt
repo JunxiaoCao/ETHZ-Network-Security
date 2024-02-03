@@ -18,4 +18,35 @@ VPN: link/network layer, tunnel, authenticate client, many standards
 
 IPsec
 Step1: set up a security association(SA) via Internel Key Exchange(IKE)
+IKEv2:
+Stage1: Initiator->responder: proposal1(choose crypto algo for rest IKE), Public DH share(g^x), NonceI
+Responder->Initiator: accept1, g^y, NonceR
+Stage2: Initiator->responder: SK("I", [cert], auth{req, NonceR}(signature), proposal2(choose crypto algo)) 
 Step2: enccapsulate packet and tunnel them between SA endpoints
+IPsec encapsulation security payload (ESP)
+|New IP header|ESP header|IP header|payload|ESP trailer|ESP auth|
+problems with IPsec: difficult to configure, error-prone due to too many options, insecure cipher
+
+WireGuard
+-no cryptographic agility(cryptographically opinionated)
+-only use SOTA primiitives
+-simplify negotiation and remove insecure primitive
+-very simple configuration
+-very small codebase
+
+-handshake built on DH exchange 1-rtt
+two key pairs
+static key pair -> similar to ssh key
+generated ephemeral key pair
+
+derive symmetric keys from four DH combi
+
+Silence is a virtue:
+-not store state before authentication -> prevent state-exhaustion attack
+-not respond to unauthenticated packet -> invisible to attacker/scanner
+-initial msg contains timestamp -> prevent replay
+
+DOS mitigation
+problem: after receiving initial msg, responder perform DH computation
+Idea: check authentication of first msg purely with symmetric crypto
+-use cookie, responder send cookie to initiator, initiator send inital msg and include MAC using cookie as key
