@@ -1,0 +1,17 @@
+IOT
+
+Botnet
+bot master connects to several control server, asynchronous, ad-hoc connection
+drop zone: host where exfiltrated data is stored util pickup by bot master
+bot agent lifecycle: initialize, exploitation, termination
+botnet topologies: botnet command model and botnet topologies
+botnet command model: 
+-no control: default malicious behaviors; less flexible, detected by signatures; most resistant to global shutdown
+-private channels: custom and covert channels, abuse or alternation of common protocols, short-term stealth, signature detection easy once CnC observed
+-public infrastructure: use common app API, reliable and anonymous
+-resilient hybrids: "default", fallback plan if CnC not available, pre-programmed contact points
+botnet topology
+-star: instruction/data transfer fast, kill-switch
+-multi-server: resilient, geographical optimization, require advanced planning for setup
+-hierarchical: not aware of the whole rest botnet, ease of resell, higher latency
+-peer 2 peer: no centric CnC, very resilient, monitor single bot can enumerate others, unpredictable flow, latency
