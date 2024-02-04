@@ -17,10 +17,11 @@ Solution: cascade of multiple proxies
 -work when at least one honest proxy
 -encryted at each layer, all keys needed to decrypt
 
-Mix-nets
+Mix-nets -> message based
 -intended to send anonymous email
 -latency is not big concern, no connection setup
 -built on asymmetric crytography
+-packet: not include sender address
 -Problem1: network attacker can observe in- and outgoing message
 Solution1: batching and mixing
 -collect messages before forwarding(threshold)
@@ -31,4 +32,44 @@ Solution: cover traffic -> achieve unobservability
 -dummy, chaf, padding traffic
 -both for sender and receiver
 -when receiver retrieves msg, message->download, no message->dummy msg download
-How to reply
+How to reply without knowing sender?
+A includes an untraceable address to B.
+generate fresh key pair
+generate fresh, random, symmetric keys for all intermediate mixes.
+return address: {R3, I2,, {R2, I1,{R1, IA}K1}K2}K3},KA
+
+Circuit-based anonymity networks(Onion routing) -> speed up mix-nets
+-problem with mix-net: high latency due to batching and mixing, overhead due to asymmetric crypto
+main idea: layered encrption, no batching and mixing, no cover traffic
+flow-based: virtual circuit(key)
+life-cycle
+stage1: circuit setup: sender know public key of all relays, negotiate shared key using asymmetric, relay store state
+stage2: data forwarding: symmetric AES, specify next relay, forward security via DH exchange
+stage3: circuit tear down: circuit destroyed to free state
+
+telescopic circuit setup: immediate forward security, session key is ephemeral cannot be recovered
+
+Attack on circuit-based anonymous system
+Attack1: traffic-analysis attack(confirmation attack): flow fingerprinting, website fingerprinting
+Attack2: higher-layer attack: stack fingerprinting: adversary can probe TCP stack by oberserving TCP handshake, can know os system->Solution: per-hop TCP
+passive traffic analysis: observe edges of network, real-time detection is hard->store and compare later->large storage
+active traffic analysis: modify packet timing-> flow watermarking: inject one bit   flow fingerprinting: inject multiple bits
+traffic analysis resistance: cover traffic and mixing->overhead, low scalability   solution: restricted set of flow duration and bandwidth combination
+
+Tor
+-circuit established over 3 relays: entry guard, middle relay, exit relay
+-telescopic setup->forward security
+-per-hop TCP->avoid TCP stack fingerprinting
+-per-hop TLS: end-to-end HTTPS is possible
+-support SOCKS proxy->TCP app can use Tor
+-end-to-end integrity checking->secure channel between client and exit relay
+-exit policies: exit can restrict destinations
+-multiple streams per circuit
+-censorship resistance(bridges(hidden relay), pluggable transport->obfuscate traffic)
+-onion service: receiver anonymity, .onion URL
+Bob has connections to a set of special relays called introduction point(IP)
+Alice connects to an IP and suggest a rendezvous
+the hash of Bob's public key is the identifier of his hidden service
+-no max path length->cheap DoS   solution: 8 relay_early cell, max length = 9
+-decision of relays: directory authority 9 in total
+-
