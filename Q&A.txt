@@ -1,0 +1,2 @@
+Q: why multiple replies trying different txid do not need to wait when cache poisoning?
+A: 
