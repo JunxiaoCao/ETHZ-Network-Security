@@ -1,2 +1,6 @@
 DNS
 DNS protocol protect against forged responses through random transaction ID(txid)
+Root Server System(RSS)->key challenge: DOS
+-DOS attack on network bandwidth->solution:localize attacks and limits their effects close to the source of traffic; hundreds of root servers deployed across ISPs worldwide; RSS is heavily anycasted(send to other nodes)
+-DOS attack on memory or CPU->solution: replication of RSS among multiple operators and machines; system monitoring
+-DNS enhancement: DoH, DoT->solution: additional overhead for crypto operations
