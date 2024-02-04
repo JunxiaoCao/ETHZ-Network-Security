@@ -1,0 +1,2 @@
+DNS
+DNS protocol protect against forged responses through random transaction ID(txid)
