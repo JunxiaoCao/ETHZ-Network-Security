@@ -4,3 +4,14 @@ Root Server System(RSS)->key challenge: DOS
 -DOS attack on network bandwidth->solution:localize attacks and limits their effects close to the source of traffic; hundreds of root servers deployed across ISPs worldwide; RSS is heavily anycasted(send to other nodes)
 -DOS attack on memory or CPU->solution: replication of RSS among multiple operators and machines; system monitoring
 -DNS enhancement: DoH, DoT->solution: additional overhead for crypto operations
+
+Attack pattern
+-cache poisoning: force name server expensive lookup or DOS to delay reply. reply faster than nameserver
+forced lookup: client-server request and response round trip
+multiple replies: try lots of random txid(no wait)
+multiple domain: [1.100].www.bank.com, 100 races, TTL only stops race for one domain name
+what prevents cache poisoning?
+-DNS txid->brute force try total 16 bit 2^16
+-DNS TTL->not that long in reality
+-TCP/IP source port(responce must match source IP port)->UDP stateless and can be spoofed, only 2^16=65536 ports
+
