@@ -1,0 +1,50 @@
+Firewall
+stateless firewall: packet filter
+-network layer
+-examine IP header
+pros: application independent, good performance and scalability
+cons: no state or application context
+
+stateful firewall: session and packer filter
+-session layer
+-keep track of network connection state
+pros: more powerful rules
+cons: no use for stateless protocol like UDP, inconsistent state beween host and firewall, state explosion
+
+Next generation firewall(NGFW): payload inspection
+
+Web application firewall(WAF): protect web-based applications from malicious requests
+-request filtering: request patterns(find attack pattern and identify future attack), SQL inject, XSS,..., blacklist/whitelist
+-authentication: user authentication, session management
+-TLS endpoint: reverse proxy: client is outside the internal work
+
+Attack techniques
+IP source spoofing: work for stateless protocol
+artificial fragmentation: fragment packet to bypass rules
+tunneling: use ICMP, DNS as channel, VPN
+
+Detection techniques
+reactive: only detect known attacks
+proactive: detect both new and known attacks
+deterministic: reason for alert is known
+non-deterministic: depend on current state, eg. sandbox, ml, heuristic
+
+static vs behavior
+static: signature based detection: create and distribute signatures of known malware
+pros: reliable, low rate of false positive, low resource requirement, fast
+cons: reactive, problems of large scale distribution of signatures, frequent update of signatures, human in the loop
+
+behavior: dynamic detection: sandbox/machine learning and classify upon observation
+pros: proactive, no signature updates
+cons: higher rate of false positives, resouce intensive, high latency, difficult to scale
+
+Polymorphism techniques:
+-swapping of equivalent code constructs
+-changing the order of code
+-inserting noise
+-compiler modulation
+
+accuracy vs precision
+accuracy: close to target value
+precision: not scatter
+
