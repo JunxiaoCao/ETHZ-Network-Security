@@ -15,3 +15,16 @@ botnet topology
 -multi-server: resilient, geographical optimization, require advanced planning for setup
 -hierarchical: not aware of the whole rest botnet, ease of resell, higher latency
 -peer 2 peer: no centric CnC, very resilient, monitor single bot can enumerate others, unpredictable flow, latency
+
+IP address and domain fluxing: keep changing to avoid being found
+Fast fluxing: Fully Qualified Domain Name(FQDN) is mapped to a new set of IP address every few minutes
+Domain fluxing: each bot independently computes a list of domain name using Domain Generation Algorithm(DGA). the list is refreshed periodically. bot try until one domain name succeeds. Only bot master know the sequence of generated domain names
+
+Botnet Defense
+-Sinkholing: 
+a technique used to redirect traffic from bots to analysis server
+a sinkhole server gathers analyics and control bots via reverse engineering(replicate DGA)
+
+IIOT: industrial internet of things
+ICS: industrial control system
+CI: critical infrastructure
