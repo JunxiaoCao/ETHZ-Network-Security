@@ -50,3 +50,8 @@ DOS mitigation
 problem: after receiving initial msg, responder perform DH computation
 Idea: check authentication of first msg purely with symmetric crypto
 -use cookie, responder send cookie to initiator, initiator send inital msg and include MAC using cookie as key
+
+VPN blocking
+-generic TLS wrapper: stunnel
+-UDP obfuscators
+-automated censorship evasion
