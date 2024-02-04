@@ -1,0 +1,34 @@
+Anonymous Communication System
+
+wireless communication:broadcast
+-receiver anonymity
+-sender is de-anonymized: location of sender can be calculated through triangulation
+How to get sender anonymity?
+-"burner phone": one time use
+-hacked WiFi: hide identity
+-Network ID != sender ID
+
+proxy or VPN
+-use layer encryption to hide content from proxy
+-Problem1: proxy can still see metadata: communication partner addresses, ...
+-Problem2: single point failure (kill-switch)
+Solution: cascade of multiple proxies
+-proxy only see addresses of neighbours
+-work when at least one honest proxy
+-encryted at each layer, all keys needed to decrypt
+
+Mix-nets
+-intended to send anonymous email
+-latency is not big concern, no connection setup
+-built on asymmetric crytography
+-Problem1: network attacker can observe in- and outgoing message
+Solution1: batching and mixing
+-collect messages before forwarding(threshold)
+-change the order of messages(mix)
+-padding every message
+-Problem2: intersection attack: users only commnicate with a small set of other users, observing long term message destinations
+Solution: cover traffic -> achieve unobservability
+-dummy, chaf, padding traffic
+-both for sender and receiver
+-when receiver retrieves msg, message->download, no message->dummy msg download
+How to reply
