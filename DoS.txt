@@ -15,6 +15,16 @@ countermeasure:cookie, no need to store session state, ensure encoding(cookie ge
 B=Hash(salt,A), salt is only known to server and keep changing
 
 application layer attack: application request floods, database connection pool exhaustion
+-Example: Algorithmic complexity
+induce worst-case behavior in a vulnerable algo
+larger the difference between best case and worst case, more vulnerable
+Hash table lookup:collisions->countermeasures: universal hashing(hash func guarantee no collision), hash ramdomization(harder to find worst case input)
+due to small table size->solution: chaining, open addressing
+-Example: regular expression denial of service(ReDoS)
+-Example: Slowloris
+keep many connections to target web server open and hold them open
+send partial request, subsequent HTTP header, but never complete->fill the maximum connection pool
+Mitigation to Slowloris: increase maximum number of clients; limit number of connections from same ip; require minimum transfer speed per connection; restrict the length of tme staying connected
 
 Mitigations to IoT attack
 -patch
@@ -45,4 +55,13 @@ pros: DDoS victim can reconstruct "attack" path
 cons: extra packet waste bandwidth
 -packet marking: routers mark 16-bit IP ID field with information that enables reconstruction of IP address(verification)
 pros: no extra overhead
-cons: 
+cons: probablistic marking requires ~1000 packets(to find attack source)
+
+DDoS denfense 
+-ingress filtering: remove packets from illegitimate source IP
+-computational puzzle: slow down attack
+-cloud- or ISP-based filtering
+-network capability: allow victim block unwanted traffic closer to source
+-IP traceback
+-over provisioning(based on past data, predict)
+-remotely triggered black hole(RTBH) filtering: update BGP rule to drop malicious traffic in border routers
