@@ -5,11 +5,14 @@ coremelt: exhaust bandwidth on victim link
 crossfire: overload target links to disconnect target region from remainder of Internet
 nameserver can no longer reply to legitimate requests
 
-protocol attack: exhaust certain device, SYN/ACK floods
+protocol attack: exhaust certain device, SYN/ACK floods(server keeps state(A+1,B))->mitigation: SYN cookie
 Example: DNS flooding-NXDOMAIN Attack
 goal: overwhelm victim's authoritative name servers
 Idea: query many non-existent subdomains of victim domain
-
+Example: Session State Exhaustion
+SYN/ACK floods(server keeps state(A+1,B))->mitigation: SYN cookie
+countermeasure:cookie, no need to store session state, ensure encoding(cookie generation func) cannot be tampered
+B=Hash(salt,A), salt is only known to server and keep changing
 
 application layer attack: application request floods, database connection pool exhaustion
 
@@ -33,3 +36,13 @@ Mitigation to reflection and amplication
 temporal lensing
 -arrive at victim at the same time->trigger packet drop-> trigger retransmission wait->shrew attack
 
+IP spoofing defense
+-ingress filtering: gateway device(router, firewall, NAT) drop packets with invalid ip
+pros: eliminate ip spoofing
+cons: source-based solution, no deployment incentives
+-iTrace: one in 20000 packets triggers a router to send a special packet with route information
+pros: DDoS victim can reconstruct "attack" path
+cons: extra packet waste bandwidth
+-packet marking: routers mark 16-bit IP ID field with information that enables reconstruction of IP address(verification)
+pros: no extra overhead
+cons: 
