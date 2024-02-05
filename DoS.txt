@@ -1,0 +1,35 @@
+DoS
+volumetric attack: consume the bandwidth, shrew attack
+Example: coremelt and Crossfire
+coremelt: exhaust bandwidth on victim link
+crossfire: overload target links to disconnect target region from remainder of Internet
+nameserver can no longer reply to legitimate requests
+
+protocol attack: exhaust certain device, SYN/ACK floods
+Example: DNS flooding-NXDOMAIN Attack
+goal: overwhelm victim's authoritative name servers
+Idea: query many non-existent subdomains of victim domain
+
+
+application layer attack: application request floods, database connection pool exhaustion
+
+Mitigations to IoT attack
+-patch
+-no hardcoded credentials, force user to change pwd
+-ISP monitor network for suspicious traffic
+
+defense agaist ip spoofing
+-address filtering by ISPs->problem: no profit to do for ISP
+-use connection-based protocols, eg.TCP ->problem: latency, memory and computation, state exhaustion DoS
+-cryptographic source authentication->problem: DoS on asymmetric crypto, require symmetric key distribution or PKI
+
+reflection and amplication: ip spoofing, send request to open server, larger or more response to victim
+Mitigation to reflection and amplication
+-prevent address spoofing
+-perform access control
+-response rate limiting
+-small amplication factor
+
+temporal lensing
+-arrive at victim at the same time->trigger packet drop-> trigger retransmission wait->shrew attack
+
