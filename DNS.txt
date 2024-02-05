@@ -15,3 +15,7 @@ what prevents cache poisoning?
 -DNS TTL->not that long in reality
 -TCP/IP source port(responce must match source IP port)->UDP stateless and can be spoofed, only 2^16=65536 ports
 
+cache poisoning-SADDNS
+when a DNS server issues a query, its source port is open to public.
+scan port using UDP to identify the open port, ICMP port to decide(open->drop, closed->reject)
+once port number is known, try txid brute force
