@@ -43,8 +43,10 @@ Problems with DNS
 -DNS protocol has no integrity or authentication assurance
 
 DNSSEC
--verify the identity of DNS root and authoritative nameservers
+-verify the identity of DNS root and authoritative nameservers->signed by every dns server(parent signs children's public key)
 -does not encrypt communications
+pros: origin authentication, integrity protection, stop DNS spoofing attack
+cons: high complexity, low performance(asymmetric), no confidentiality protection, large response message, slow adoption
 
 DoT/DoH
 -encrypt DNS queries
@@ -55,5 +57,3 @@ DoT
 DoH
 -use standard HTTPS port, no filtering, easy integration, camouflaged within other HTTPS traffic
 -problems for enterprises: create mechanism to overwrite centrally-imposed DNS settings(hard to manage);n employees use DoH to bypass DNS-based traffic filtering(easy to bypass); attackers bypass organizational control(easy to attack)
-
-
