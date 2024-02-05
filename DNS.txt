@@ -56,4 +56,4 @@ DoT
 
 DoH
 -use standard HTTPS port, no filtering, easy integration, camouflaged within other HTTPS traffic
--problems for enterprises: create mechanism to overwrite centrally-imposed DNS settings(hard to manage);n employees use DoH to bypass DNS-based traffic filtering(easy to bypass); attackers bypass organizational control(easy to attack)
+-problems for enterprises: create mechanism to overwrite centrally-imposed DNS settings(hard to manage); employees use DoH to bypass DNS-based traffic filtering(easy to bypass); attackers bypass organizational control(easy to attack)
