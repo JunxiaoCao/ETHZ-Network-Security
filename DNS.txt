@@ -19,3 +19,41 @@ cache poisoning-SADDNS
 when a DNS server issues a query, its source port is open to public.
 scan port using UDP to identify the open port, ICMP port to decide(open->drop, closed->reject)
 once port number is known, try txid brute force
+how to overcome ICMP rate limiting?
+-use multiple source IPs
+-infer by probe ICMP rate limit after scan with fake ip
+how to defend against SADDNS?
+-DNSSEC
+-0x20 encoding (increase entrophy to query id)
+-disable icmp port unreachable
+-randomize icmp global rate limit
+
+Attack Domain Registrar
+hack and brute force pwd, then change registration entries and lock owner
+
+Attack Network and Local configuration
+-manipulate DNS configuration settings
+-have target point to attackers nameserver
+for Wide Area Network(WAN): scan ISP networks, identify vulnerable routers or weak/default pwd.
+for Local Area Network(LAN): attack client router or DHCP server directly, attack DHCP exchange in local network
+for local host: manipulate DNS local host settings(malware), disable anti-virus link
+
+Problems with DNS
+-default dns queries and response are sent in plain text via UDP
+-DNS protocol has no integrity or authentication assurance
+
+DNSSEC
+-verify the identity of DNS root and authoritative nameservers
+-does not encrypt communications
+
+DoT/DoH
+-encrypt DNS queries
+
+DoT
+-specific port, filtered by firewall/attacker, 
+
+DoH
+-use standard HTTPS port, no filtering, easy integration, camouflaged within other HTTPS traffic
+-problems for enterprises: create mechanism to overwrite centrally-imposed DNS settings(hard to manage);n employees use DoH to bypass DNS-based traffic filtering(easy to bypass); attackers bypass organizational control(easy to attack)
+
+
