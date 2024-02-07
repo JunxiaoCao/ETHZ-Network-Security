@@ -17,7 +17,7 @@ TLS: transport layer, end-to-end, not authenticate client, few standards
 VPN: link/network layer, tunnel, authenticate client, many standards
 
 IPsec
-Step1: set up a security association(SA) via Internel Key Exchange(IKE)
+Step1: set up a security association(SA) via Internet Key Exchange(IKE)
 IKEv2:
 Stage1: Initiator->responder: proposal1(choose crypto algo for rest IKE), Public DH share(g^x), NonceI
 Responder->Initiator: accept1, g^y, NonceR
@@ -29,7 +29,7 @@ problems with IPsec: difficult to configure, error-prone due to too many options
 
 WireGuard
 -no cryptographic agility(cryptographically opinionated)
--only use SOTA primiitives
+-only use SOTA primitives
 -simplify negotiation and remove insecure primitive
 -very simple configuration
 -very small codebase
@@ -51,7 +51,7 @@ problem: after receiving initial msg, responder perform DH computation
 Idea: check authentication of first msg purely with symmetric crypto
 -use cookie, responder send cookie to initiator, initiator send inital msg and include MAC using cookie as key
 
-VPN blocking
+VPN blocking circumvention
 -generic TLS wrapper: stunnel
 -UDP obfuscators
 -automated censorship evasion
