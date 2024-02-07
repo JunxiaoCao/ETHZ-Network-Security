@@ -40,4 +40,8 @@ SCiON drawbacks
 -bandwidth overhead: path in packet about 80 bytes->solution: path control, simpler data plane
 -complexity in key management like new certificate->solution: no, but high security
 -setup cost->solution: methods to facilitate deployment
--
+
+Gate Approach against DDoS
+-geofencing and path control
+
+
