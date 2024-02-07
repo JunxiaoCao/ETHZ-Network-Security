@@ -44,4 +44,3 @@ SCiON drawbacks
 Gate Approach against DDoS
 -geofencing and path control
 
-
