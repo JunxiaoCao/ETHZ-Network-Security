@@ -1,0 +1,43 @@
+SCiON
+
+-stateless packet
+-instant convergence
+-path-aware
+-multi-path
+-scalability(AS level routing rather than IP prefix based routing)
+
+Approach for Trust Scalability: Isolation Domain(ISD)
+ISD: grouping of ASes -> fault is isolated, not transmitted
+ISD core: ASes that manage ISD and provide global connectivity
+Core AS: AS that is part of ISD core
+
+Control Plane-Routing
+-consructs and dissemminate path segment
+path exploration, path dissemination, certificate dissemination/renewal
+
+Data Plane-Packet forwarding
+-Combine path segments to path
+-packets contain path
+-simple router, stateless
+
+Intra-ISD Path exploration: beaconing
+-Core ASes initial Path-segment Construction Beacons(PCBs) or beacons
+what PCB(beacon) contains?
+PCB creation time, path segment info(AS name, ...)
+
+up-path segment: AS to core AS
+down-path segment: core AS to AS
+
+beaconing NOT rely on iterative convergence NOR forwarding table updates
+
+what beaconing rely on?
+Path Server Infrastructure
+local path server: up-path segment
+Core path server: up and down segment
+
+SCiON drawbacks
+-additional latency to obtain path->solution: but amortized by caching and path reuse
+-bandwidth overhead: path in packet about 80 bytes->solution: path control, simpler data plane
+-complexity in key management like new certificate->solution: no, but high security
+-setup cost->solution: methods to facilitate deployment
+-
